@@ -70,29 +70,5 @@ def LUdescomp(A): # A debe ser matriz cuadrada
     return (L,U)
 
 
-""" Programa principal """
 
-np.set_printoptions(precision=4,suppress=True)
-
-A = np.random.uniform(-10,10,(4,4))
-print(A)
-
-b = np.random.uniform(-10,10,(4,1))
-print(b)
-
-x = GaussElimSimple(A,b)
-print(x)
-
-x = GaussElimPiv(A,b)
-print(x)
-
-print(A@x-b)
-
-lu = LUdescomp(A)
-L = lu[0]
-U = lu[1]
-print(L)
-print(U)
-print(L@U)
-print(A)
 
