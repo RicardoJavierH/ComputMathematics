@@ -27,6 +27,23 @@ def escalonaConPiv(A):
             ratio = A[i,j]/A[j,j]
             operacionFila(A,i,j,ratio)
 
+def reescalaFila(A,i,factor):
+    A[i,:] = factor*A[i,:]
+    return None
+
+def escalonaReducidaConPiv(A): # convierte a la forma escalonada reducida
+    nfil = A.shape[0]
+    ncol = A.shape[1]
+    
+    for j in range(0,nfil):
+        imax = np.argmax(np.abs(A[:,j]))
+        intercambiaFil(A,imax,j)
+        for i in range(0,nfil):
+            if(i != j):
+                ratio = A[i,j]/A[j,j]
+                operacionFila(A,i,j,ratio)
+        reescalaFila(A,j,1/A[j,j])
+        
 
 def sustRegresiva(A,b):   #resuelve un sistema escalonado
     N = b.shape[0]
@@ -52,6 +69,15 @@ def GaussElimPiv(A,b):
     b1 = b1.reshape(b.shape[0],1)
     x = sustRegresiva(A1,b1)
     return x
+
+def GaussJordanPiv(A,b):
+    Ab = np.append(A,b,axis=1)
+    escalonaReducidaConPiv(Ab)
+    A1 = Ab[:,0:Ab.shape[1]-1].copy()
+    b1 = Ab[:,Ab.shape[1]-1].copy()
+    b1 = b1.reshape(b.shape[0],1)
+    x = sustRegresiva(A1,b1)
+    return x    
 
 def LUdescomp(A): # A debe ser matriz cuadrada
     L = np.zeros_like(A)
