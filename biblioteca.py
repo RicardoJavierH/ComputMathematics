@@ -98,3 +98,4 @@ def LUdescomp(A): # A debe ser matriz cuadrada
 
 
 
+

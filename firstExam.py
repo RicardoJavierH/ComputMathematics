@@ -31,7 +31,7 @@ print("Norma suma del residuo:\n",np.linalg.norm(res,1))
 print("n    Nro de cond    error relativo     error residual")
 print("-"*57)
 
-for i in range(4,20):
+for i in range(4,21):
     x_exact = np.ones(i)
     A = matriz(i)
     b = A.dot(x_exact)
