@@ -95,7 +95,17 @@ def LUdescomp(A): # A debe ser matriz cuadrada
     np.fill_diagonal(L,1)
     return (L,U)
 
-
+def metNewtonSistNoLin(fun, jacfun, solAprox, nIter):
+    solAprox = np.array(solAprox)
+    for i in range(nIter):
+        A = np.array(jacfun(solAprox))
+        b = np.array(fun(solAprox))
+        b = b.reshape(2,1)
+        Y = GaussJordanPiv(A,b)
+        Y = np.reshape(Y,2)
+        solAprox = solAprox - Y
+    
+    return solAprox    
 
 
 

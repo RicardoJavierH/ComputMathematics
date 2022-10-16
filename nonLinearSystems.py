@@ -2,9 +2,11 @@ import sympy
 import numpy as np
 import matplotlib.pyplot as plt
 #sympy.init_printing
-import scipy
+#import scipy
 from scipy import linalg as la
 from scipy import optimize
+
+
 
 ''' sympy library'''
 
@@ -40,6 +42,7 @@ def f(x):
 
 sol = optimize.fsolve(f, [1, 1])
 print(sol)
+
 print("Evaluation in the numerical solution:",f(sol))
 
 f_mat = sympy.Matrix([y - x**3 -2*x**2 + 1, y + x**2 - 1])
