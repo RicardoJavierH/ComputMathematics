@@ -1,4 +1,7 @@
+from turtle import shape
 import numpy as np
+import numpy.polynomial as P
+import scipy.linalg as la
 
 def operacionFila(A,fm,fp,factor): # filafm = filafm - factor*filafp
     A[fm,:] = A[fm,:] - factor*A[fp,:]
@@ -95,8 +98,9 @@ def LUdescomp(A): # A debe ser matriz cuadrada
     np.fill_diagonal(L,1)
     return (L,U)
 
-def metNewtonSistNoLin(fun, jacfun, solAprox, nIter):
+def metNewtonSistNoLin(fun,jacfun,solAprox,nIter): #solAprox is ndarray
     solAprox = np.array(solAprox)
+    print(solAprox)
     for i in range(nIter):
         A = np.array(jacfun(solAprox))
         b = np.array(fun(solAprox))
@@ -104,8 +108,33 @@ def metNewtonSistNoLin(fun, jacfun, solAprox, nIter):
         Y = GaussJordanPiv(A,b)
         Y = np.reshape(Y,2)
         solAprox = solAprox - Y
-    
-    return solAprox    
+
+    return solAprox 
+
+def interpLagrange(cx,cy):
+  n = len(cx)
+  p = P.Polynomial([0])
+  for i in range(n):
+    mascara = np.ones(n,dtype=bool)
+    mascara[i] = False
+    raices = cx[mascara]
+    Laux = P.Polynomial.fromroots(raices)
+    p = p + cy[i]*Laux/Laux(cx[i])
+  return p
 
 
+def interpSisteLin(x,y):
+    n = len(x)
+    A = np.zeros((n,n))
+    for i in range(n):
+        for j in range(n):
+            A[i,j] = np.power(x[i],j)
 
+    b = np.zeros((n,1))
+    for i in range(n):
+        b[i,0] = y[i]
+
+    vect = la.solve(A,b)
+    vect.resize(n)
+    pol = P.Polynomial(vect)
+    return pol
