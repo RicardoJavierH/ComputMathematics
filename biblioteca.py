@@ -48,12 +48,19 @@ def escalonaReducidaConPiv(A): # convierte a la forma escalonada reducida
         reescalaFila(A,j,1/A[j,j])
         
 
-def sustRegresiva(A,b):   #resuelve un sistema escalonado
-    N = b.shape[0]
+def sustRegresiva(A,b):   #Resuelve un sistema escalonado
+    N = b.shape[0] # A y b deben ser array numpy bidimensional
     x = np.zeros((N,1))
     for i in range(N-1,-1,-1):
         x[i,0] = (b[i,0]-np.dot(A[i,i+1:N],x[i+1:N,0]))/A[i,i]
-    return x
+    return x # Array bidimensional
+
+def sustProgresiva(A,b):   #Resuelve un sistema escalonado
+    N = b.shape[0] # A y b deben ser array numpy bidimensional
+    x = np.zeros((N,1))
+    for i in range(0,N):
+        x[i,0] = (b[i,0]-np.dot(A[i,0:i],x[0:i,0]))/A[i,i]
+    return x # Array bidimensional
 
 def GaussElimSimple(A,b):
     Ab = np.append(A,b,axis=1)
@@ -62,7 +69,7 @@ def GaussElimSimple(A,b):
     b1 = Ab[:,Ab.shape[1]-1].copy()
     b1 = b1.reshape(b.shape[0],1)
     x = sustRegresiva(A1,b1)
-    return x
+    return x # Array bidimensional
 
 def GaussElimPiv(A,b):
     Ab = np.append(A,b,axis=1)
@@ -71,7 +78,7 @@ def GaussElimPiv(A,b):
     b1 = Ab[:,Ab.shape[1]-1].copy()
     b1 = b1.reshape(b.shape[0],1)
     x = sustRegresiva(A1,b1)
-    return x
+    return x # Array bidimensional
 
 def GaussJordanPiv(A,b):
     Ab = np.append(A,b,axis=1)
