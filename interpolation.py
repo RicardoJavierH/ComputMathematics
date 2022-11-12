@@ -11,7 +11,6 @@ import numpy.polynomial as P
 x = np.linspace(-4,4,15)
 y = np.arctan(x)
 
-
 pol=bib.interpLagrange(x,y)
 #pol=bib.interpSisteLin(x,y)
 
