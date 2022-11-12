@@ -8,4 +8,6 @@ Z = np.exp(-((X-1)**2+Y**2))
 
 # Plot the density map using nearest-neighbor interpolation
 plt.pcolormesh(X,Y,Z)
+
+
 plt.show()
