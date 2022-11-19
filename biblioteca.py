@@ -145,3 +145,25 @@ def interpSisteLin(x,y):
     vect.resize(n)
     pol = P.Polynomial(vect)
     return pol
+
+def EulerODE(f,y0,t):
+    n = len(t)
+    y = np.zeros(n)
+    y[0] = y0
+    for i in range(1,n):
+        h = t[i] - t[i-1]
+        y[i] = y[i-1] + h * f(y[i-1],t[i-1])
+    return y
+
+def RK4(f,y0,t):
+    n = len(t)
+    y = np.zeros(n)
+    y[0] = y0
+    for i in range(1,n):
+        h = t[i] - t[i-1]
+        k1 = f(y[i-1],t[i-1])*h
+        k2 = f(y[i-1]+k1/2,t[i-1]+h/2)*h
+        k3 = f(y[i-1]+k2/2,t[i-1]+h/2)*h
+        k4 = f(y[i-1]+k3,t[i-1]+h)*h
+        y[i] = y[i-1] + (k1+2*k2+2*k3+k4)/6
+    return y
