@@ -1,4 +1,5 @@
 import numpy as np
+import biblioteca as bib
 from scipy import integrate 
 import matplotlib.pyplot as plt
 
@@ -11,9 +12,15 @@ def f(xy, t): # x: Nro de presas, y: Nro de depredadores
 # c: habilidad de las presas para escapar de los depredadores
 # d: tasa de mortalidad de los depredadores
 
+<<<<<<< HEAD
 T = 100 # tiempo final
 xy0 = [600, 40]
 t = np.linspace(0, T, 250)
+=======
+xy0 = [600, 400]
+t = np.linspace(0, 50, 250)
+#xy_t = bib.RK4SystemasODE(f, xy0, t)
+>>>>>>> fa22fe4cd4351faae44abb9fbadd551e84fc9dbf
 xy_t = integrate.odeint(f, xy0, t)
 xy_t.shape
 
