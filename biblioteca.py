@@ -167,3 +167,44 @@ def RK4(f,y0,t):
         k4 = f(y[i-1]+k3,t[i-1]+h)*h
         y[i] = y[i-1] + (k1+2*k2+2*k3+k4)/6
     return y
+
+def RK4Systems(f,xy0,t):
+    n = len(t)
+    x = np.zeros(n)
+    y = np.zeros(n)
+    
+    x0, y0 = xy0
+    x[0] = x0
+    y[0] = y0
+    for i in range(1,n):
+        h = t[i] - t[i-1]
+        kx1, ky1 = f([x[i-1],y[i-1]],t[i-1])
+        kx2, ky2 = f([x[i-1]+kx1*h/2,y[i-1]+ky1*h/2],t[i-1]+h/2)
+        kx3, ky3 = f([x[i-1]+kx2*h/2,y[i-1]+ky2*h/2],t[i-1]+h/2)
+        kx4, ky4 = f([x[i-1]+kx3*h,y[i-1]+ky3*h],t[i-1]+h)
+        
+        x[i] = x[i-1] + h*(kx1+2*kx2+2*kx3+kx4)/6
+        y[i] = y[i-1] + h*(ky1+2*ky2+2*ky3+ky4)/6
+        xy_t = np.array([x,y]).T
+    return xy_t
+
+def RK4SystemasODE(f, xy0, t):
+    n = len(t)
+    x = np.zeros(n)
+    y = np.zeros(n)
+    x[0], y[0] = xy0
+
+    for i in range(1,n):
+        h = t[i] - t[i-1]
+        kx1, ky1 = f([x[i-1],y[i-1]],t[i-1])
+
+        kx2, ky2 = f([x[i-1]+kx1*h/2,y[i-1]+ky1*h/2],t[i-1]+h/2)
+        kx3, ky3 = f([x[i-1]+kx2*h/2,y[i-1]+ky2*h/2],t[i-1]+h/2)
+        kx4, ky4 = f([x[i-1]+kx3*h,y[i-1]+ky3*h],t[i-1]+h)
+
+        x[i] = x[i-1] + h*(kx1+2*kx2+2*kx3+kx4)/6
+        y[i] = y[i-1] + h*(ky1+2*ky2+2*ky3+ky4)/6
+
+        xy_t = np.array([x,y]).T
+
+    return xy_t

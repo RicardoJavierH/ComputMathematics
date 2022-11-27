@@ -1,4 +1,5 @@
 import numpy as np
+import biblioteca as bib
 from scipy import integrate 
 import matplotlib.pyplot as plt
 
@@ -9,6 +10,7 @@ def f(xy, t):
 
 xy0 = [600, 400]
 t = np.linspace(0, 50, 250)
+#xy_t = bib.RK4SystemasODE(f, xy0, t)
 xy_t = integrate.odeint(f, xy0, t)
 xy_t.shape
 
@@ -22,7 +24,5 @@ axes[0].legend()
 axes[1].plot(xy_t[:,0], xy_t[:,1], 'k')
 axes[1].set_xlabel("Number of prey")
 axes[1].set_ylabel("Number of predators")
-
-
 
 plt.show()
