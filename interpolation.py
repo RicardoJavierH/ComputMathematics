@@ -5,11 +5,11 @@ import numpy.polynomial as P
 
 
 ''' Interpolación '''
-x=np.array([1.,1.3,1.6,1.9,2.2])
-y=np.array([0.7651977,0.6200860,0.4554022,0.2818186,0.1103623])
+#x=np.array([1.,1.3,1.6,1.9,2.2])
+#y=np.array([0.7651977,0.6200860,0.4554022,0.2818186,0.1103623])
 
-#x = np.linspace(-4,4,4)
-#y = np.arctan(x)
+x = np.linspace(-4,4,8)
+y = np.arctan(x)
 
 pol=bib.interpNewton(x,y) #interpolación de Newton por diferencias divididas
 #pol=bib.interpLagrange(x,y)

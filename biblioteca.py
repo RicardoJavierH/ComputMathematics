@@ -149,8 +149,8 @@ def interpNewton(cx,cy):
   #Construyendo el polinomio de Newton
   p = P.Polynomial(cy[0])
   mascara = np.zeros(n,dtype=bool)
-  for i in range(0,n):
-    mascara[i] = True
+  for i in range(1,n):
+    mascara[i-1] = True
     raices = cx[mascara]
     p = p + A[i,i+1]*P.Polynomial.fromroots(raices)
   
