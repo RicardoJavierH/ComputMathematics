@@ -1,49 +1,32 @@
+import scipy.sparse as sp
+#import scipy.sparse.linalg
 import numpy as np
 import matplotlib.pyplot as plt
 
+#Matrices dispersas en formato COO
+print("Formato COO")
 
-def lorenz(x, y, z, s=10, r=28, b=2.667):
-    """
-    Given:
-       x, y, z: a point of interest in three dimensional space
-       s, r, b: parameters defining the lorenz attractor
-    Returns:
-       x_dot, y_dot, z_dot: values of the lorenz attractor's partial
-           derivatives at the point x, y, z
-    """
-    x_dot = s*(y - x)
-    y_dot = r*x - y - x*z
-    z_dot = x*y - b*z
-    return x_dot, y_dot, z_dot
+values = [1, 2, 3, 4]
+rows = [0, 1, 2, 3]
+cols = [1, 3, 2, 0]
+
+A = sp.coo_matrix((values, (rows, cols)), shape=[4, 4])
+print(A)
+print(A.data)
 
 
-dt = 0.01
-num_steps = 10000
+#Formato CSR
+print("Formato CSR")
 
-# Need one more for the initial values
-xs = np.empty(num_steps + 1)
-ys = np.empty(num_steps + 1)
-zs = np.empty(num_steps + 1)
+A.tocsr
 
-# Set initial values
-xs[0], ys[0], zs[0] = (0., 1., 1.05)
-
-# Step through "time", calculating the partial derivatives at the current point
-# and using them to estimate the next point
-for i in range(num_steps):
-    x_dot, y_dot, z_dot = lorenz(xs[i], ys[i], zs[i])
-    xs[i + 1] = xs[i] + (x_dot * dt)
-    ys[i + 1] = ys[i] + (y_dot * dt)
-    zs[i + 1] = zs[i] + (z_dot * dt)
+print("valA = ",A.data)
+print("IA = ",A.row)
+print("JA = ",A.col)
 
 
-# Plot
-ax = plt.figure().add_subplot(projection='3d')
-
-ax.plot(xs, ys, zs, lw=0.5)
-ax.set_xlabel("X Axis")
-ax.set_ylabel("Y Axis")
-ax.set_zlabel("Z Axis")
-ax.set_title("Lorenz Attractor")
-
-plt.show()
+N = 10
+A = sp.eye(N, k=1) - 2 * sp.eye(N) + sp.eye(N, k=-1)
+A = sp.diags([1, -2, 1], [1, 0, -1], shape=[N, N], format='csc')
+fig, ax = plt.subplots()
+ax.spy(A)
