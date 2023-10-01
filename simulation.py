@@ -1,4 +1,3 @@
-#https://github.com/Thidius/Wave-and-Heat-simulation/tree/main
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import cm
