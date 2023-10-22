@@ -126,4 +126,4 @@ def simulation_pdes(rect,hs,BC, c, frames, eq):
             surf = ax.plot_surface(X, Y, Z_init, alpha = 1, cmap =plt.cm.jet, vmin = zmin, vmax = zmax)
             plt.pause(dt)
 
-simulation_pdes(rect = [-1,1,-1,1], hs = [50,50], BC = [0,0,0,0], c = 2, frames = 1000, eq = 'Wave')
+simulation_pdes(rect = [-1,1,-1,1], hs = [50,50], BC = [0,0,0,0], c = 2, frames = 1000, eq = 'Heat')

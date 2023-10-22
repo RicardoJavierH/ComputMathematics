@@ -30,3 +30,4 @@ print(A @ resp - b)
 
 resp2 = la.solve(A,b)
 print(resp2)
+print(A @ resp2 - b)

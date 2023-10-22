@@ -2,15 +2,15 @@ import numpy as np
 import scipy.linalg as la
 import matplotlib.pyplot as plt
 # define true model parameters
-x = np.linspace(-1, 1, 100)
+x = np.linspace(-1, 1, 100) # intervalo sobre el cual efectuamos el experimento
 a, b, c = 1, 2, 150
 y_exact = a + b * x + c * x**2
 
 # simulate noisy data
-m = 100
+m = 20
 X = 1 - 2 * np.random.rand(m)
 
-Y = a + b * X + c * X**2 +10*np.random.randn(m)
+Y = a + b * X + c * X**2 +2*np.random.randn(m)
 
 # fit the data to the model using linear least square
 A = np.vstack([X**0, X**1, X**2]) # see np.vander for alternative
