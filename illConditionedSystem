@@ -18,7 +18,7 @@ for i in range(4,17):
     H = hilbert_matrix(i)
     b = H.dot(x)
 
-    c = cond(H);
+    c = cond(H,2);
     xx = solve(H,b)
     err = norm(x-xx,np.inf)/norm(x,np.inf)
     solutions.append(xx)
