@@ -105,6 +105,8 @@ def LUdescomp(A): # A debe ser matriz cuadrada
     np.fill_diagonal(L,1)
     return (L,U)
 
+def LDLtDescomp(A): # A debe ser matriz cuadrada
+
 def metNewtonSistNoLin(fun,jacfun,solAprox,nIter): #solAprox is ndarray
     solAprox = np.array(solAprox)
     print(solAprox)
