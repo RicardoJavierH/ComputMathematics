@@ -2,7 +2,7 @@ import pylab as plt
 import numpy as np
 
 # Sample data
-side = np.linspace(-2,2,10)
+side = np.linspace(-2,2,100)
 X,Y = np.meshgrid(side,side)
 Z = np.exp(-((X-1)**2+Y**2))
 
