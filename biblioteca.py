@@ -105,7 +105,25 @@ def LUdescomp(A): # A debe ser matriz cuadrada
     np.fill_diagonal(L,1)
     return (L,U)
 
-def LDLtDescomp(A): # A debe ser matriz cuadrada
+#def LDLtDescomp(A): # A debe ser matriz cuadrada
+
+def projection(u,v): #projection numpy vectors u onto v
+    aux = np.dot(u,v)/np.dot(v,v)
+    return aux*v
+
+def columnOrtonormalize(A): # Ortonormalize columns of numpy array
+    B = A.copy()
+    N = B.shape[1]
+    for col in range(N):
+        sum = np.zeros_like(B[:,col])
+        for j in range(col):
+            sum = sum + projection(B[:,col],B[:,j]) 
+        B[:,col] = B[:,col] - sum
+
+    for col in range(N):
+        norm = la.norm(B[:,col],2)
+        B[:,col] = B[:,col]/norm 
+    return B
 
 def metNewtonSistNoLin(fun,jacfun,solAprox,nIter): #solAprox is ndarray
     solAprox = np.array(solAprox)

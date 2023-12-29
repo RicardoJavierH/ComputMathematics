@@ -12,6 +12,7 @@ A = np.random.uniform(-10,10,(4,4))
 print(A)
 b = np.random.uniform(-10,10,(4,1))
 print(b)
+
 '''
 L=np.array([[1,0,0],[1,1,0],[1,1,1]])
 b = np.array([[1],[2],[3]])
