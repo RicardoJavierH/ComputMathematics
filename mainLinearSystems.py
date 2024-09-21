@@ -2,9 +2,6 @@ import numpy as np
 import biblioteca as bib
 np.set_printoptions(precision=4,suppress=True)
 
-""" Programa principal """
-
-
 
 # B=np.array([[2,-3,5],[6,-1,3],[-4,1,-2]]) #matrix to analyse
 
@@ -12,6 +9,7 @@ A = np.random.uniform(-10,10,(4,4))
 print(A)
 b = np.random.uniform(-10,10,(4,1))
 print(b)
+
 '''
 L=np.array([[1,0,0],[1,1,0],[1,1,1]])
 b = np.array([[1],[2],[3]])
