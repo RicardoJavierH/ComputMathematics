@@ -111,19 +111,25 @@ def projection(u,v): #projection numpy vectors u onto v
     aux = np.dot(u,v)/np.dot(v,v)
     return aux*v
 
-def columnOrtonormalize(A): # Ortonormalize columns of numpy array
-    B = A.copy()
-    N = B.shape[1]
+def QRdecomp(A): # Ortonormalize columns of numpy array
+    Q = A.copy()
+    R = np.zeros_like(A)
+    N = Q.shape[1]
     for col in range(N):
-        sum = np.zeros_like(B[:,col])
+        sum = np.zeros_like(Q[:,col])
         for j in range(col):
-            sum = sum + projection(B[:,col],B[:,j]) 
-        B[:,col] = B[:,col] - sum
+            sum = sum + projection(Q[:,col],Q[:,j]) 
+        Q[:,col] = Q[:,col] - sum
 
     for col in range(N):
-        norm = la.norm(B[:,col],2)
-        B[:,col] = B[:,col]/norm 
-    return B
+        norm = la.norm(Q[:,col],2)
+        Q[:,col] = Q[:,col]/norm 
+
+    for col in range(N):
+        for row in range(col+1):
+            R[row,col] = np.dot(Q[:,row],A[:,col]) 
+
+    return (Q,R)
 
 def metNewtonSistNoLin(fun,jacfun,solAprox,nIter): #solAprox is ndarray
     solAprox = np.array(solAprox)
